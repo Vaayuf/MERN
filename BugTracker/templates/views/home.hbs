@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BugTracker</title>
+  <style>
+
+  </style>
+
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+
+
+<body>
+
+  <div class="topnav">
+    <a href="/home" id="home">Home</a>
+    <a href="/">Logout</a>
+  </div>
+  <div class="openBtn">
+    <button class="openButton" onclick="openForm()"><strong>Add Bugs</strong></button>
+  </div>
+  <br />
+  <div class="loginPopup">
+    <div class="formPopup" id="popupForm">
+      <form action="/projhome" id="myform" method="POST" class="formContainer">
+        <h2>Add Bugs</h2>
+        <label for="bugname">
+          <strong>Name</strong>
+        </label>
+        <input type="text" id="bugname" placeholder="Name" name="bugname" required>
+        <label for="description">
+          <strong>Description</strong>
+        </label>
+        <input type="text" id="description" placeholder="Description" name="description" required>
+        <div class="radio">
+          <input type="radio" id="low" name="threat" value="Low">
+          <label for="low">Low</label><br>
+          <input type="radio" id="moderate" name="threat" value="Moderate">
+          <label for="moderate">Moderate</label><br>
+          <input type="radio" id="critical" name="threat" value="Critical">
+          <label for="critical">Critical</label></br>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+  </div>
+  <br />
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Threat Level</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each result}}
+      <tr>
+        <td>{{this.bugname}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.threat}}</td>
+        <td>
+          <button id="{{this._id}}" bugname="{{this.bugname}}" description="{{this.description}}"  threat= "{{this.threat}}"  onclick="openForm1(this)">Update</button>
+        </td>
+        <td>
+          <button id="delete" onclick="location.href = 'http://localhost:3001/home/delete/{{this._id}}'">Delete</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+
+  </table>
+  <script>
+    function openForm() {
+      document.getElementById("popupForm").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("popupForm").style.display = "none";
+    }
+
+    function openForm1(val) {
+      console.log(val);
+      //const json = JSON.parse(val);
+      //location.href = 'http://localhost:3001/home/update/' + val;
+      document.getElementById("popupForm").style.display = "block";
+      document.getElementById("bugname").value = val.getAttribute('bugname');
+      document.getElementById("description").value = val.getAttribute('description');
+      //document.getElementById("threat").value = val.getAttribute('threat');
+      const form = document.getElementById("myform");
+      form.action = 'http://localhost:3001/home/update/' + val.id;
+    }
+  </script>
+</body>
+
+</html>
+

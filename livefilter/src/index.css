@@ -1,0 +1,35 @@
+.searchbar {
+    padding-left: 5px;
+    margin-top: 30px;
+    border-radius: 4px;
+}
+
+.topsearch{
+    text-align: center;
+}
+
+img {
+    margin-top: 30px;
+}
+.fontchangeBrand{
+    font-family: 'Redressed', cursive;
+}
+
+.fontchangeList{
+    font-family: 'B612', sans-serif;
+}
+
+.active{
+    font-family: 'B612', sans-serif;
+    font-weight: bold ;
+}
+.name{
+    font-family: 'Playfair Display', serif;;
+    /* font-style: italic; */
+    
+}
+
+u{
+    color:gray;
+    text-shadow: 1px 1px gray;
+}
